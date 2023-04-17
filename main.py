@@ -30,10 +30,15 @@ nato_df = pandas.read_csv("nato_phonetic_alphabet.csv")
 nato_dict = {row.letter:row.code for (index, row) in nato_df.iterrows()}
 
 #TODO 2. Create a list of the phonetic code words from a word that the user inputs.
-user_input = input("Enter a word: ").upper()
-try:
-    phonetic_list = [nato_dict[char] for char in user_input]
-except KeyError as ErrorMessage:
-    print(f'{ErrorMessage} is a number! Only enter letters in the alphabet.')
-else:
-    print(phonetic_list)
+
+def generate_phonetic():
+    user_input = input("Enter a word: ").upper()
+    try:
+        phonetic_list = [nato_dict[char] for char in user_input]
+    except KeyError as ErrorMessage:
+        print(f'{ErrorMessage} is a number! Only enter letters in the alphabet.')
+        generate_phonetic()
+    else:
+        print(phonetic_list)
+
+generate_phonetic()
